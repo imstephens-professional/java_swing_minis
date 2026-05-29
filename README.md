@@ -4,3 +4,4 @@ Small coding projects created using Java Swing. These projects are designed to f
 
 ## Current Projects
 * Typing Game (May 2026; **Incomplete**)
+* Calculator Application (May 2026; **Incomplete**)
