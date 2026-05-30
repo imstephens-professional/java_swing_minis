@@ -7,4 +7,5 @@ This project is currently **incomplete**.
 
 ## Notes on Development
 These notes are primarily for the developer.
+* Open Java file with WindowBuilder in order to change the design of the window.
 * My Eclipse version did not come with a WindowBuilder. I needed to use Eclipse Marketplace in order to download it.
