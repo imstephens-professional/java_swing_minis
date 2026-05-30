@@ -4,3 +4,7 @@ Textfiles written in Notepad.
 Icons created in Clip Studio Paint (5.0.4). 
 
 This project is currently **incomplete**. 
+
+## Notes on Development
+These notes are primarily for the developer.
+* My Eclipse version did not come with a WindowBuilder. I needed to use Eclipse Marketplace in order to download it.
