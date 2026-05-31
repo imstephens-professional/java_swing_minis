@@ -31,7 +31,7 @@ public class NumGame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TypingGame window = new TypingGame();
+					NumGame window = new NumGame();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
