@@ -4,6 +4,6 @@ Small coding projects utilizing Java Swing. These projects are designed to famil
 
 ## Projects (Difficulty, Start Date, & Completion Status)
 * Typing Game (Easy; May 2026; **Incomplete**)
-* Number Guessing Game (Easy; Planned)
+* Number Guessing Game (Easy; May 2026; **Incomplete**)
 * Calculator Application (Easy; Planned)
 * Running Game (Medium; Planned)
