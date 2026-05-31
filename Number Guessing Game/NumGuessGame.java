@@ -41,18 +41,19 @@ public class NumGame {
   } // end of main method
 
   /*
-	 * Purpose: Create the Application
-	 */
-	public NumGame() {
-		initialize();
-	}
+   * Purpose: Create the Application
+   */
+  public NumGame() {
+	initialize();
+  }
 
   /*
-	 * Purpose: Initialize the contents of the frame. 
-	 */
-	private void initialize() {
+   * Purpose: Initialize the contents of the frame. 
+   */
+  private void initialize() {
 		frame = new JFrame(); // creates new frame
 		frame.setBounds(100, 100, 450, 300); // sets boundaries of frame (x, y, width, height)
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // closes window when hitting 'x' button
+  } // end of initialize()
   
 } // end of NumGame
