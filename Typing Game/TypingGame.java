@@ -69,7 +69,6 @@ public class TypingGame {
 	// stores the ArrayLists containing the Strings
 	public ArrayList<ArrayList<String>> allDiff = new ArrayList<ArrayList<String>>();
 
-	
 	/* 
 	 * Method Purpose: Main method; launches application
 	 */
@@ -87,15 +86,12 @@ public class TypingGame {
 		});
 	} // end of main 
 	
-	
-	
 	/*
 	 * Method Purpose: Initialize the application.
 	 */
 	public TypingGame() throws IOException {
 		initialize();
 	}
-	
 	
 	/*
 	 * Method Purpose: Initialize the contents of the frame. This includes the view of the word the user is requested to type, the
@@ -258,8 +254,6 @@ public class TypingGame {
 		
 	} // end of initialize()
 	
-	
-	
 	/* 
 	 * Method Purpose: Reads Strings from .txt files and puts them in an ArrayList
 	 */ 
@@ -293,8 +287,6 @@ public class TypingGame {
 		
 	} 
 	
-	
-	
 	/*
 	 * Method Purpose: Selects random word from the ArrayList & removes it so the player does not keep
 	 * repeating it.
@@ -310,7 +302,6 @@ public class TypingGame {
 		return output;
 	} 
 	
-	
 	/*
 	 * Method Purpose: Sets the words up for the first game
 	 */
@@ -320,7 +311,6 @@ public class TypingGame {
 		ogWord2 = randWord();
 		nextWord.setText(ogWord2);
 	} 
-	
 	
 	/*
 	 * Method Purpose: Sets up the words for every consequent game after the first one.
@@ -371,7 +361,6 @@ public class TypingGame {
 		firstGame();
 	}
 	
-	
 	/*
 	 * Method Purpose: Called on when the user typed in a String accurately. Adds 1 to the userScore and updates information in the
 	 * frame.
@@ -380,7 +369,6 @@ public class TypingGame {
 		userScore += 1;
 		scoreLabel.setText("Score: " + userScore);
 	} 
-	
 	
 	/*
 	 * Method Purpose: Updates the timer if the game ends (timer runs out of time or the game resets).
@@ -408,9 +396,6 @@ public class TypingGame {
 			}	
 		});
 		
-		t.start();
-		
-	} // end of updateTimer()
-	
-	
+		t.start();	
+	} // end of updateTimer()	
 } // end of public class TypingGame
