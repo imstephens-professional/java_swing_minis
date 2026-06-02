@@ -12,4 +12,4 @@ These notes are primarily for the developer.
 * While you can create the JFrame and related code from scratch, it's far more useful to have WindowBuilder installed.
 * Open Java file with WindowBuilder in order to change the design of the window.
 * My Eclipse version did not come with a WindowBuilder. I needed to use Eclipse Marketplace in order to download it.
-* Potential Improvements: Add text that tells the player when they type a word incorrectly.
+* Potential Improvements: Add text that tells the player when they type a word incorrectly. Add a separate win condition if the player finishes all four difficulties.
