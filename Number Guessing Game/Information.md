@@ -1,6 +1,5 @@
 ## Description
 Software developed in Eclipse Studio IDE (2060-03).
-Textfiles written in Notepad.
 
 This project is currently **incomplete**. 
 
