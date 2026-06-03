@@ -1,5 +1,5 @@
 ## Description
-A Java calculator that utilizes the Shunting Yard Algorithm to solve user-inputted. 
+A Java calculator that utilizes the Shunting Yard Algorithm to solve user-inputted problems. 
 
 Software developed in Eclipse Studio IDE (2060-03). 
 
