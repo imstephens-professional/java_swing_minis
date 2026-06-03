@@ -7,4 +7,4 @@ This project is currently **incomplete**.
 
 ## Notes on Development
 These notes are primarily for the developer. 
-* Created a rough version of the stack calculator first without implementing GUI. I will develop a better version of the stack calculator that also implements GUI. Added the rough draft to the project in a file to demonstrate the changes.
+* Created a rough version of the stack calculator first (around 2022) without implementing GUI. I will develop a better version of the stack calculator that also implements GUI. Added the rough draft to the project in a file to demonstrate the changes.
