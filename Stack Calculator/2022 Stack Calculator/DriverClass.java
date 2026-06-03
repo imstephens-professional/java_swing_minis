@@ -8,7 +8,7 @@ public class DriverClass {
 		test.processInput("2  * 4 * 3");
 		test.processInput("25 / 5 - 6");
 		test.processInput("31 % 4 * 200000000");
-    System.out.println("");
+        System.out.println("");
 
 		// Variable test
 		test.processInput("x = 4");
