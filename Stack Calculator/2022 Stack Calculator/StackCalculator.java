@@ -1,22 +1,16 @@
-package lookethhere;
-
-/*	Made by: 
- * 		Isabella Stephens
- * 	Made on: 
- * 		7 September 2022
- * 	Updated on: 
- * 		21 October 2022
+/*	Author Name: Isabella Stephens
+ * 	Created: 7 September 2022
+ * 	Updated: 3 June 2026
  * 
- * this is a guide on how to write code that works, but works in a very dubious manner
- * i apologize in advance
- */
-
-import java.util.ArrayList;
-/* Progress:
  * Summary: Takes a String from the driver and categorizes them into an ArrayList. It distinguishes between the 
  * char's '(', '[', ')', ']'; the operators '+', '-', '/', '%', '*', and '**'; positive and negative numbers; 
  * positive and negative variables; and the '=' sign. Any whitespace and tab markers are ignored by the program.
  */
+
+/*
+ * Imports
+ */
+import java.util.ArrayList;
 
 public class StackCalculator {
 	public void processInput(String s) {
@@ -428,4 +422,4 @@ public class StackCalculator {
 
 	}
 
-}
+} // end of StackCalculator
