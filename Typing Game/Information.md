@@ -13,4 +13,3 @@ These notes are primarily for the developer.
 * Open Java file with WindowBuilder in order to change the design of the window.
 * My Eclipse version did not come with a WindowBuilder. I needed to use Eclipse Marketplace in order to download it.
 * **Potential Improvements**: Add text that tells the player when they type a word incorrectly.
-* **Error Handling Blindspots**: Player can still press Start after finishing a game, allowing them to pick up where they left off. It is possible (although unlikely) that the player can "finish" all four difficulties before the timer runs out.
