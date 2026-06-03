@@ -1,12 +1,8 @@
-package lookethhere;
-
-
 public class Stack {
 	public Node head = null;
 
 	// pushes element on top of the stack
 	public void push(Node i) {
-
 		if (head == null) {
 			head = i;
 		} else {
@@ -49,5 +45,4 @@ public class Stack {
 	}
 
 
-
-}
+} // end of Stack class
