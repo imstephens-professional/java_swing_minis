@@ -9,7 +9,9 @@
  */
 
 /*
- * Imports
+ * Imports.
+ * Provides EventQueues, ArrayLists, Random Number Generator, Timer Creator, Buffered Reader, File Reader, Error Handling, Frame/Panel Creation & Editing, 
+ * and ActionListener.
  */
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -73,7 +75,7 @@ public class TypingGame {
 	 * Method Purpose: Main method; launches application
 	 */
 	public static void main(String[] args) {
-		// figure out what this does
+		// manages asynchronous events
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -171,7 +173,7 @@ public class TypingGame {
 					updateScore();
 					game();
 					userInput.setText("");
-					userInput.requestFocusInWindow(); // focuses the user's 
+					userInput.requestFocusInWindow(); // focuses the user's mouse onto the text field again 
 				}
 			}
 		});
@@ -269,8 +271,6 @@ public class TypingGame {
 		buff.close(); 
 	} 
 	
-	
-	
 	/* 
 	 * Method Purpose: This changes the difficulty based on how many words the user completed.
 	 */
@@ -279,12 +279,12 @@ public class TypingGame {
 		
 		ArrayList<String> tempStore = allDiff.get(currDiff);
 		int arraySize = tempStore.size();
-		
-		if(arraySize == count) {
-			count+=1;
+
+		// if the player successfully typed the same amount of words as the ArrayList size, then move the difficulty up by one level (unless at max difficulty)
+		if((arraySize == count) && (currDiff != 3)) {
+			count = 0;
 			currDiff+=1;
 		}
-		
 	} 
 	
 	/*
@@ -337,7 +337,7 @@ public class TypingGame {
 		
 		// reset variables
 		count = 0;
-		currDiff = 1;
+		currDiff = 0;
 		userScore = 0;
 		scoreLabel.setText("Score: " + userScore);
 		ogWord = "";
