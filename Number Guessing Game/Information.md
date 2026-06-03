@@ -8,3 +8,4 @@ This project is currently **complete**.
 ## Notes on Development
 These notes are primarily for the developer. 
 * **Potential Improvements**: Center the text inside the panel/frame.
+* **Error Handling Blindspots**: Does not check to see if the text the user types can be cast into an integer.
