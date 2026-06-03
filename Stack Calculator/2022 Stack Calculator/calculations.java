@@ -1,5 +1,6 @@
-package lookethhere;
-
+/* 
+ * Imports
+ */ 
 import java.util.ArrayList;
 
 /* Portion that does the Shunting Yard Algorithm + actual calculations
