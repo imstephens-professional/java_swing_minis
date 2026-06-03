@@ -1,5 +1,6 @@
-package lookethhere;
-
+/* 
+ * Imports
+ */ 
 import java.util.ArrayList;
 
 public class Variable {
@@ -30,7 +31,6 @@ public class Variable {
 			// tells user that the variable is set
 			System.out.println(var + " is set to " + value);
 		}
-
 	}
 
 	public ArrayList<String> replaceVars(ArrayList<String> z) {
