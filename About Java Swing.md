@@ -14,4 +14,5 @@ There are plenty of helpful guides on Java Swing. Below are some examples.
 * [Oracle Java Swing Documentation](https://docs.oracle.com/javase/tutorial/uiswing/index.html) is the actual documentation of the API. Provides an in-depth look.
 * [GeeksForGeeks Quick Guide](https://www.geeksforgeeks.org/java/introduction-to-java-swing/) is a quick rundown of the toolkit.
 
-//
+## Notes
+While you can create the JFrame and related code from scratch, it's far more useful to have WindowBuilder installed in your IDE.
