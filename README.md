@@ -6,5 +6,5 @@ Small coding projects utilizing Java Swing. These projects are designed to famil
 * Typing Game (Easy; May 2026; **Complete**)
 * Number Guessing Game (Easy; May 2026; **Complete**)
 * Button Matching Game (Easy; June 2026; **Incomplete**)
-* Stack-Based Calculator (Easy; June 2026; **Incomplete**)
 * Running Game (Easy; Planned)
+* Stack-Based Calculator (Medium; June 2026; **Incomplete**)
