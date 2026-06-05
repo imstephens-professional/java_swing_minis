@@ -4,8 +4,8 @@ package looksHeres;
  * Created: 3 June 2026
  * Updated: 5 June 2026
  * 
- * Description: A Java button-matching game. The frame has 8 buttons with 4 matches. The player must click each match as fast as they
- * can.
+ * Description: A Java button-matching game. The frame has 8 buttons with 4 matches. The player must click each button to find the 
+ * corresponding button that matches. The game ends when the player presses "New Game".
  */
 
 /*
@@ -14,9 +14,7 @@ package looksHeres;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
 import java.util.Comparator;
-import java.util.LinkedHashSet;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,20 +24,22 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 
-public class ButtonMatching {
+public class ButtonMatching implements ActionListener {
 	private JFrame frame;
 	private JButton startButton, resetButton;
 	private JButton match1, match2, match3, match4, match5, match6, match7, match8;
-	private JLabel timerLabel, scoreLabel;
-	//int btnValue1, btnValue2, btnValue3, btnValue4, btnValue5, btnValue6, btnValue7, btnValue8;
+	private JButton firstClicked, secondClicked;
+	private JLabel scoreLabel;
 	ArrayList<JButton> allButtons = new ArrayList<JButton>();
-	private JLabel testLabel;
-	//ArrayList<Integer> buttonValues = new ArrayList<Integer>();
+	private boolean isChecking = false; // Prevents spam clicking during delays
+	int pairsFound = 0;
+	int userScore = 0;
 	
 	// main method
 		public static void main(String[] args) {
@@ -55,21 +55,15 @@ public class ButtonMatching {
 			});
 		} // end of main method
 		
-		/*
-		 * Purpose: Create the application
-		 */
 		public ButtonMatching() {
 			initialize();
 		}
 		
-		/*
-		 * Purpose: 
-		 */
 		public void initialize() {
 			// creates & sets the frame
 			frame = new JFrame(); // creates new frame
 			frame.setTitle("Button-Matching Game");
-			frame.setBounds(100, 100, 450, 300); // sets boundaries of frame (x, y, width, height)
+			frame.setBounds(100, 100, 300, 250); // sets boundaries of frame (x, y, width, height)
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // closes window when hitting 'x' button
 			
 			// creates & sets the panel
@@ -82,16 +76,8 @@ public class ButtonMatching {
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			
-			// TIMER LABEL
-			timerLabel = new JLabel("Timer: ");
-			GridBagConstraints gbc_timerLabel = new GridBagConstraints();
-			gbc_timerLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_timerLabel.gridx = 0;
-			gbc_timerLabel.gridy = 0;
-			panel.add(timerLabel, gbc_timerLabel);
-			
 			// SCORE LABEL
-			scoreLabel = new JLabel("Score: ");
+			scoreLabel = new JLabel("Score: " + userScore);
 			GridBagConstraints gbc_scoreLabel = new GridBagConstraints();
 			gbc_scoreLabel.insets = new Insets(0, 0, 5, 0);
 			gbc_scoreLabel.gridx = 11;
@@ -100,13 +86,7 @@ public class ButtonMatching {
 			
 			// FIRST BUTTON
 			match1 = new JButton("Click Here");
-			match1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JButton sourceButton = (JButton) e.getSource();
-		            int attachedValue = (int) sourceButton.getClientProperty("myValueKey");
-		            System.out.println("Button 1 value is: " + attachedValue);
-				}
-			});
+			match1.addActionListener(this);
 			match1.setEnabled(false); 
 			GridBagConstraints gbc_match1 = new GridBagConstraints();
 			gbc_match1.insets = new Insets(0, 0, 5, 5);
@@ -116,13 +96,7 @@ public class ButtonMatching {
 			
 			// FIFTH BUTTON
 			match5 = new JButton("Click Here");
-			match5.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JButton sourceButton = (JButton) e.getSource();
-		            int attachedValue = (int) sourceButton.getClientProperty("myValueKey");
-		            System.out.println("Button 5 value is: " + attachedValue);
-				}
-			});
+			match5.addActionListener(this);
 			match5.setEnabled(false);
 			GridBagConstraints gbc_match5 = new GridBagConstraints();
 			gbc_match5.insets = new Insets(0, 0, 5, 0);
@@ -132,21 +106,7 @@ public class ButtonMatching {
 			
 			// SECOND BUTTON
 			match2 = new JButton("Click Here");
-			match2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JButton sourceButton = (JButton) e.getSource();
-		            int attachedValue = (int) sourceButton.getClientProperty("myValueKey");
-		            System.out.println("Button 2 value is: " + attachedValue);
-				}
-			});
-			testLabel = new JLabel("\"\"");
-			testLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			GridBagConstraints gbc_testLabel = new GridBagConstraints();
-			gbc_testLabel.anchor = GridBagConstraints.NORTH;
-			gbc_testLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_testLabel.gridx = 7;
-			gbc_testLabel.gridy = 2;
-			panel.add(testLabel, gbc_testLabel);
+			match2.addActionListener(this);
 			match2.setEnabled(false);
 			GridBagConstraints gbc_match2 = new GridBagConstraints();
 			gbc_match2.insets = new Insets(0, 0, 5, 5);
@@ -156,13 +116,7 @@ public class ButtonMatching {
 			
 			// SIXTH BUTTON
 			match6 = new JButton("Click Here");
-			match6.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JButton sourceButton = (JButton) e.getSource();
-		            int attachedValue = (int) sourceButton.getClientProperty("myValueKey");
-		            System.out.println("Button 6 value is: " + attachedValue);
-				}
-			});
+			match6.addActionListener(this);
 			match6.setEnabled(false);
 			GridBagConstraints gbc_match6 = new GridBagConstraints();
 			gbc_match6.insets = new Insets(0, 0, 5, 0);
@@ -182,6 +136,7 @@ public class ButtonMatching {
 					match6.setEnabled(true);
 					match7.setEnabled(true);
 					match8.setEnabled(true);
+					resetButton.setEnabled(true);
 					startButton.setEnabled(false);
 					startButton.setBackground(null);
 				}
@@ -194,13 +149,7 @@ public class ButtonMatching {
 			
 			// THIRD BUTTON
 			match3 = new JButton("Click Here");
-			match3.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JButton sourceButton = (JButton) e.getSource();
-		            int attachedValue = (int) sourceButton.getClientProperty("myValueKey");
-		            System.out.println("Button 3 value is: " + attachedValue);
-				}
-			});
+			match3.addActionListener(this);
 			match3.setEnabled(false);
 			GridBagConstraints gbc_match3 = new GridBagConstraints();
 			gbc_match3.insets = new Insets(0, 0, 5, 5);
@@ -209,9 +158,11 @@ public class ButtonMatching {
 			panel.add(match3, gbc_match3);
 			
 			// RESET BUTTON
-			resetButton = new JButton("Restart");
+			resetButton = new JButton("New Game");
 			resetButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					JOptionPane.showMessageDialog(null, "Game Over!" + "\n" + "Final Score: " + userScore);
+					resetGameCompletely();
 				}
 			});
 			resetButton.setEnabled(false);
@@ -223,13 +174,7 @@ public class ButtonMatching {
 			
 			// SEVENTH BUTTON
 			match7 = new JButton("Click Here");
-			match7.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JButton sourceButton = (JButton) e.getSource();
-		            int attachedValue = (int) sourceButton.getClientProperty("myValueKey");
-		            System.out.println("Button 7 value is: " + attachedValue);
-				}
-			});
+			match7.addActionListener(this);
 			match7.setEnabled(false);
 			GridBagConstraints gbc_match7 = new GridBagConstraints();
 			gbc_match7.insets = new Insets(0, 0, 5, 0);
@@ -239,13 +184,7 @@ public class ButtonMatching {
 			
 			// FOURTH BUTTON
 			match4 = new JButton("Click Here");
-			match4.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JButton sourceButton = (JButton) e.getSource();
-		            int attachedValue = (int) sourceButton.getClientProperty("myValueKey");
-		            System.out.println("Button 4 value is: " + attachedValue);
-				}
-			});
+			match4.addActionListener(this);
 			match4.setEnabled(false);
 			GridBagConstraints gbc_match4 = new GridBagConstraints();
 			gbc_match4.insets = new Insets(0, 0, 0, 5);
@@ -255,13 +194,7 @@ public class ButtonMatching {
 			
 			// EIGHTH BUTTON
 			match8 = new JButton("Click Here");
-			match8.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JButton sourceButton = (JButton) e.getSource();
-		            int attachedValue = (int) sourceButton.getClientProperty("myValueKey");
-		            System.out.println("Button 8 value is: " + attachedValue);
-				}
-			});
+			match8.addActionListener(this);
 			match8.setEnabled(false);
 			GridBagConstraints gbc_match8 = new GridBagConstraints();
 			gbc_match8.gridx = 11;
@@ -278,13 +211,13 @@ public class ButtonMatching {
 			allButtons.add(match7);
 			allButtons.add(match8);
 			
-			game();
+			numAssigning();
 		}
 		
 		/*
 		 * Purpose: Produce 4 randomly-generated ints and randomly assigns them to buttons.
 		 * 
-		 * Note: Likely not efficiently-written.
+		 * Note: Likely not efficiently-written. 
 		 */
 		public void numAssigning() {
 			ArrayList<Integer> numbers = new ArrayList<Integer>();
@@ -295,6 +228,7 @@ public class ButtonMatching {
 			for(int i = 0; i < 10; i++) {
 				temp = r.nextInt(100);
 				numbers.add(temp);
+				numbers.add(temp);
 			}
 			
 			// sorts the ArrayList with Int values
@@ -302,41 +236,132 @@ public class ButtonMatching {
 			
 			// shuffles the buttons
 			Collections.shuffle(allButtons);
-			
-			// remove duplicates
-			 Set<Integer> listWithoutDuplicates = new LinkedHashSet<Integer>(numbers);
-			 numbers.clear();
-			 numbers.addAll(listWithoutDuplicates);
 			 
-			 // assigns a num value to the button
+			 // assigns num value to the buttons
 			 for(int i = 0; i < allButtons.size(); i++) {
 				 JButton temporary = allButtons.get(i);
 				 temporary.putClientProperty("myValueKey", numbers.get(i));
 			 }
-			 
-			
-			// TESTING
-			for(int i = 0; i < numbers.size(); i++) {
-				System.out.println(numbers.get(i) + "/n");
-			}
-			
 		}
 		
 		/*
-		 * Purpose
+		 * Purpose: Press the "Click Here!" Buttons and an action will be performed.
+		 */
+		@Override
+	    public void actionPerformed(ActionEvent e) {
+			if (isChecking) return; // Ignore input if game is processing a mismatch
+			
+			JButton clickedButton = (JButton) e.getSource();
+			int attachedValue = (int) clickedButton.getClientProperty("myValueKey");
+			
+			// Prevent clicking already matched or currently revealed buttons
+	        if (attachedValue==-1 || clickedButton == firstClicked) {
+	            return;
+	        }
+	        
+	        // Set the text of the button to its hidden value
+	        String valueString = String.valueOf(attachedValue);
+	        clickedButton.setText(valueString);
+	        
+	        if (firstClicked == null) {
+	            firstClicked = clickedButton; // First button selection of the pair
+	        } else {
+	            secondClicked = clickedButton; // Second button selection of the pair
+	            checkMatch();
+	        }
+		}
+		
+		/*
+		 * Purpose: Checks to see if the first and second button the user pressed have the same values.
 		 */
 		public void checkMatch() {
+			int attachedValue1 = (int) firstClicked.getClientProperty("myValueKey");
+			int attachedValue2 = (int) secondClicked.getClientProperty("myValueKey");
 			
+			// match found
+			if(attachedValue1 == attachedValue2) {
+				firstClicked.setEnabled(false);
+				secondClicked.setEnabled(false);
+				firstClicked.setText("");
+	            secondClicked.setText("");
+	            
+	            resetSelection();
+	            
+	            pairsFound++;
+	            updateScore();
+	            
+	            if (pairsFound == 4) {
+	                resetGame();
+	            }
+			} else {
+	            // MISMATCH: Hide values again after a brief 700ms delay
+	            isChecking = true;
+	            Timer timer = new Timer(700, new ActionListener() {
+	                @Override
+	                public void actionPerformed(ActionEvent e) {
+	                    firstClicked.setText("Click Here");
+	                    secondClicked.setText("Click Here");
+	                    resetSelection();
+	                    isChecking = false;   
+	                }
+	            });
+	            timer.setRepeats(false); // Run only once
+	            timer.start();
+	        }
 		}
 		
 		/*
-		 * Purpose:  
+		 * Purpose: Reset the first and second buttons the user clicked to nothing
 		 */
-		public void game() {
+		public void resetSelection() {
+			firstClicked = null;
+			secondClicked = null;
+		}
+		
+		/*
+		 * Purpose: Updates the score by 1 with every successful match
+		 */
+		public void updateScore() {
+			userScore += 1;
+			scoreLabel.setText("Score: " + userScore);
+		} 
+		
+		
+		/*
+		 * Purpose: Completely resets the game. Happens when player clicks "New Game"
+		 */
+		public void resetGameCompletely() {
+			isChecking = false; // Prevents spam clicking during delays
+			pairsFound = 0;
+			userScore = 0;
+			scoreLabel.setText("Score: " + userScore);
+			resetSelection();
+			
+			for(int i = 0; i < allButtons.size(); i++) {
+				JButton temps = allButtons.get(i);
+				temps.setEnabled(false);
+				temps.setText("Click Here");
+			}
+
+			startButton.setEnabled(true);
+			resetButton.setEnabled(false);
 			numAssigning();
 		}
 		
+		/*
+		 * Purpose: Resets variables mid-game. Only called on when the player has matched all values in the current board.
+		 */
 		public void resetGame() {
-			//
+			isChecking = false; // Prevents spam clicking during delays
+			pairsFound = 0;
+			resetSelection();
+			
+			for(int i = 0; i < allButtons.size(); i++) {
+				JButton temps = allButtons.get(i);
+				temps.setEnabled(true);
+				temps.setText("Click Here");
+			}
+			numAssigning();
 		}
+		
 } // end of ButtonMatching
