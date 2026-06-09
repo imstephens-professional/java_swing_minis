@@ -1,4 +1,4 @@
-# Java Swing Mini Projects
+# Java Mini Projects
 ## Description
 Small coding projects utilizing Java Swing. These projects are designed to familiarize the developer with Java Swing and GUI creation. These projects are developed in Eclipse Studio IDE (2026-03).
 
